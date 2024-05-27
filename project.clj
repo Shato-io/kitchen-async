@@ -1,6 +1,6 @@
-(defproject kitchen-async "0.1.0-SNAPSHOT"
+(defproject io.shato/kitchen-async "0.2.0"
   :description "A Promise library for ClojureScript, or a poor man's core.async"
-  :url "https://github.com/athos/kitchen-async"
+  :url "https://github.com/Shato-io/kitchen-async"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
@@ -69,5 +69,4 @@
             "test-lumo" ["tach" "lumo"]
             "test-min" ["do"
                         ["doo" "phantom" "min-test" "once"]
-                        ["doo" "node" "node-min-test" "once"]]}
-  )
+                        ["doo" "node" "node-min-test" "once"]]})
