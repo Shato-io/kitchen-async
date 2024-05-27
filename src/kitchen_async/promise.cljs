@@ -16,6 +16,11 @@
 (defn set-promise-impl! [impl]
   (reset! %promise-impl impl))
 
+(defn promise? [o]
+  ;; https://stackoverflow.com/a/27746324/1956471
+  (and (some? o)
+       (fn? (.-then o))))
+
 (defn resolve [x]
   (let [p (promise-impl)]
     (new p (fn [resolve] (resolve x)))))
@@ -28,9 +33,13 @@
 
 (defn then
   ([p f]
-   (.then (->promise p) (fn [x] (f x))))
+   (if (promise? p)
+     (.then p (fn [x] (f x)))
+     (f p)))
   ([p f g]
-   (.then (->promise p) (fn [x] (f x)) (fn [x] (g x)))))
+   (if (promise? p)
+     (.then p (fn [x] (f x)) (fn [x] (g x)))
+     (f p))))
 
 (defn catch* [p f]
   (then p identity f))
@@ -39,7 +48,9 @@
   (then p f f))
 
 (defn all [ps]
-  (goog.Promise.all (into-array (map ->promise ps))))
+  (if (some promise? ps)
+    (goog.Promise.all (into-array (map ->promise ps)))
+    ps))
 
 (defn race [ps]
   (goog.Promise.race (into-array (map ->promise ps))))
@@ -48,7 +59,7 @@
   ([ms] (timeout ms nil))
   ([ms v]
    (p/promise [resolve]
-     (js/setTimeout #(resolve v) ms))))
+              (js/setTimeout #(resolve v) ms))))
 
 (extend-protocol promisable/Promisable
   goog.Promise
@@ -73,8 +84,8 @@
   [f]
   (fn [& args]
     (p/promise [resolve reject]
-      (letfn [(callback [err val]
-                (if err
-                  (reject err)
-                  (resolve val)))]
-        (apply f (concat args [callback]))))))
+               (letfn [(callback [err val]
+                         (if err
+                           (reject err)
+                           (resolve val)))]
+                 (apply f (concat args [callback]))))))
