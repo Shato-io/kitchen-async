@@ -1,0 +1,11 @@
+{:lint-as {kitchen-async.promise/->          clojure.core/->
+           kitchen-async.promise/try         clojure.core/->
+           kitchen-async.promise/->>         clojure.core/->>
+           kitchen-async.promise/as->        clojure.core/as->
+           kitchen-async.promise/let         clojure.core/let
+           kitchen-async.promise/plet        clojure.core/let
+           kitchen-async.promise/loop        clojure.core/loop
+           kitchen-async.promise/recur       clojure.core/recur
+           kitchen-async.promise/with-redefs clojure.core/with-redefs
+           kitchen-async.promise/doseq       clojure.core/doseq
+           kitchen-async.promise/promise     clojure.core/fn}}
