@@ -1,4 +1,4 @@
-(defproject io.shato/kitchen-async "0.2.1"
+(defproject io.shato/kitchen-async "0.2.2"
   :description "A Promise library for ClojureScript, or a poor man's core.async"
   :url "https://github.com/Shato-io/kitchen-async"
   :license {:name "Eclipse Public License"

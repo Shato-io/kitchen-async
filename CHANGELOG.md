@@ -1,9 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-## [Unreleased]
+## [0.2.2]
 ### Changed
-- Add a new arity to `make-widget-async` to provide a different widget shape.
+- Add sync versions of most of the functions in order to avoid promises if not necessary.
 
 ## [0.1.1] - 2017-02-28
 ### Changed

@@ -53,7 +53,9 @@
     ps))
 
 (defn race [ps]
-  (goog.Promise.race (into-array (map ->promise ps))))
+  (if-let [first-value-without-promise (first (filter (complement promise?) ps))]
+    first-value-without-promise
+    (goog.Promise.race (into-array (map ->promise ps)))))
 
 (defn timeout
   ([ms] (timeout ms nil))
