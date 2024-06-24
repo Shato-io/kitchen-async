@@ -14,3 +14,4 @@ pom.xml.asc
 .hg/
 .cljs_node_repl/
 .clj-kondo/.cache
+.lsp
